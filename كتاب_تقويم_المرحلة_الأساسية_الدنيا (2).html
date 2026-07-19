@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>القياس والتقويم التربوي للمرحلة الأساسية الدنيا — شريهان مرتجى</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Cairo:wght@300;400;500;600;700&family=Reem+Kufi:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF6EC;
+    --rule:#E4D9C0;
+    --ink:#2B2440;
+    --ink-soft:#5C5470;
+    --plum:#4A3F63;
+    --coral:#DD8A5B;
+    --coral-deep:#B9683A;
+    --sage:#6E8F6A;
+    --mustard:#D6A23E;
+    --sky:#5B8CA6;
+    --shadow: 0 16px 34px -18px rgba(43,36,64,0.35);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      repeating-linear-gradient(180deg, transparent 0 38px, var(--rule) 38px 39px),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Cairo', sans-serif;
+    min-height:100vh;
+  }
+  ::selection{ background: var(--coral); color:#fff; }
+
+  .app{ max-width:1180px; margin:0 auto; padding: 26px 24px 90px; }
+  @media (max-width:720px){ .app{ padding:18px 14px 70px; } }
+
+  /* ===== Notebook header ===== */
+  .book-header{
+    background: var(--plum);
+    color:#F4EEDD;
+    border-radius: 20px;
+    padding: 30px 34px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+    box-shadow: var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  .book-header::after{
+    content:"";
+    position:absolute; inset:0 auto auto 0;
+    width:240px; height:240px;
+    background: radial-gradient(circle, rgba(221,138,91,0.22), transparent 70%);
+    transform: translate(-30%,-30%);
+  }
+  .book-header h1{
+    font-family:'Baloo Bhaijaan 2', sans-serif;
+    font-weight:800;
+    font-size:32px;
+    margin:0 0 6px;
+    color:#F7EFD8;
+    line-height:1.25;
+  }
+  .book-header p{
+    font-family:'Reem Kufi', sans-serif;
+    font-size:14.5px;
+    color:#CFC5E0;
+    margin:0;
+    max-width:520px;
+    line-height:1.8;
+  }
+  .author-line{
+    margin-top:12px !important;
+    font-family:'Cairo', sans-serif !important;
+    font-size:14px !important;
+    font-weight:700;
+    color:#F3E5C0 !important;
+    letter-spacing:.3px;
+  }
+  .badge-stack{ display:flex; gap:8px; flex-wrap:wrap; position:relative; z-index:1;}
+  .badge{
+    background: rgba(244,238,221,0.1);
+    border:1px solid rgba(244,238,221,0.25);
+    color:#F4EEDD;
+    font-size:11.5px;
+    padding:7px 12px;
+    border-radius:999px;
+  }
+
+  /* ===== Tabs (index folder tabs) ===== */
+  .tabs{
+    display:flex;
+    gap:6px;
+    margin: 22px 0 0;
+    overflow-x:auto;
+    padding-bottom:2px;
+  }
+  .tab{
+    flex:0 0 auto;
+    background: #EFE4CC;
+    border:1px solid var(--rule);
+    border-bottom:none;
+    color: var(--ink-soft);
+    font-family:'Cairo',sans-serif;
+    font-size:13.5px;
+    font-weight:600;
+    padding:12px 18px;
+    border-radius: 12px 12px 0 0;
+    cursor:pointer;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:.2s;
+  }
+  .tab .dot{ width:9px; height:9px; border-radius:50%; background:var(--rule); flex-shrink:0;}
+  .tab:hover{ background:#F4E9D2; }
+  .tab.active{ background: var(--paper); color:var(--ink); box-shadow: 0 -3px 0 0 var(--coral) inset; }
+  .tab.active .dot{ background: var(--coral); }
+  .tab.done .dot{ background: var(--sage); }
+  .tab.exam-tab{ background:#EADCE0; }
+  .tab.exam-tab .dot{ background: var(--rose,#A2555B); }
+  .tab.exam-tab.active{ box-shadow: 0 -3px 0 0 #A2555B inset; }
+
+  /* ===== Page panel ===== */
+  .panel{
+    background: var(--paper);
+    border:1px solid var(--rule);
+    border-radius: 0 16px 16px 16px;
+    padding: 40px 44px 20px;
+    box-shadow: var(--shadow);
+    position:relative;
+  }
+  @media (max-width:720px){ .panel{ padding:26px 20px 10px; } }
+
+  .chapter{ display:none; animation: fadeIn .4s ease; }
+  .chapter.active{ display:block; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .eyebrow{ font-size:12.5px; font-weight:700; color:var(--coral-deep); letter-spacing:.3px; margin-bottom:8px; }
+  h2.page-title{
+    font-family:'Baloo Bhaijaan 2', sans-serif;
+    font-size:30px;
+    font-weight:700;
+    color:var(--ink);
+    margin:0 0 6px;
+  }
+  .page-sub{ font-family:'Reem Kufi', sans-serif; color:var(--ink-soft); font-size:15.5px; margin-bottom:28px; }
+
+  p{ font-size:15.8px; line-height:2; color:var(--ink); }
+  .lede{ font-size:17px; line-height:2; margin-bottom:22px; }
+
+  .section-title{
+    font-family:'Baloo Bhaijaan 2',sans-serif;
+    font-size:19px;
+    color:var(--plum);
+    margin:34px 0 6px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .section-title .tag{
+    font-family:'Cairo',sans-serif;
+    font-size:11px;
+    font-weight:700;
+    color:#fff;
+    background:var(--sky);
+    padding:3px 9px;
+    border-radius:999px;
+  }
+  .section-title.test .tag{ background: var(--coral-deep); }
+
+  .domain-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:22px 0;}
+  @media (max-width:760px){ .domain-grid{ grid-template-columns:1fr; } }
+  .domain{
+    background:#fff;
+    border-radius:14px;
+    padding:18px;
+    border-top:4px solid var(--sage);
+    box-shadow: var(--shadow);
+  }
+  .domain.b{ border-top-color: var(--coral); }
+  .domain.c{ border-top-color: var(--sky); }
+  .domain h4{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:18px; margin:0 0 8px; color:var(--ink);}
+  .domain p{ font-size:14px; margin:0; color:var(--ink-soft); line-height:1.85;}
+  .domain ul{ margin:8px 0 0; padding-inline-start:18px; font-size:13.5px; color:var(--ink-soft); line-height:1.9;}
+
+  .card{
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:14px;
+    padding:22px 24px;
+    margin:20px 0;
+    box-shadow: var(--shadow);
+  }
+  .card h3{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:21px; margin:0 0 10px; color:var(--coral-deep); }
+
+  .theorist-row{ display:flex; gap:14px; flex-wrap:wrap; margin:20px 0; }
+  .theorist{
+    flex:1 1 260px;
+    background: linear-gradient(160deg,#fff, #FBF6EC);
+    border-radius:14px;
+    padding:20px;
+    box-shadow: var(--shadow);
+    border:1px solid var(--rule);
+  }
+  .theorist .name{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:18px; color:var(--plum); margin-bottom:4px;}
+  .theorist .key{ font-size:12.5px; color:var(--coral-deep); font-weight:700; margin-bottom:10px;}
+  .theorist p{ font-size:13.8px; margin:0; color:var(--ink-soft); line-height:1.85;}
+
+  .reveal{
+    border:1.5px dashed var(--sky);
+    border-radius:12px;
+    padding:16px 18px;
+    margin:18px 0;
+    cursor:pointer;
+    background: rgba(91,140,166,0.06);
+  }
+  .reveal:hover{ background: rgba(91,140,166,0.1); }
+  .reveal .q{ font-weight:700; display:flex; justify-content:space-between; align-items:center; }
+  .reveal .q::after{ content:"اضغط للكشف ▾"; font-size:11.5px; font-weight:400; color:var(--sky); }
+  .reveal.open .q::after{ content:"إخفاء ▴"; }
+  .reveal .a{ display:none; margin-top:12px; padding-top:12px; border-top:1px solid var(--rule); color:var(--ink-soft); font-size:14.5px; line-height:1.9;}
+  .reveal.open .a{ display:block; }
+
+  .quiz{
+    background: var(--plum);
+    color:#F4EEDD;
+    border-radius:14px;
+    padding:24px 26px;
+    margin:24px 0;
+  }
+  .quiz h3{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:19px; margin:0 0 12px; color:#F7EFD8;}
+  .quiz-options{ display:flex; flex-direction:column; gap:8px; margin-top:10px;}
+  .quiz-opt{
+    background:rgba(244,238,221,0.08);
+    border:1px solid rgba(244,238,221,0.2);
+    color:#F4EEDD;
+    padding:10px 14px;
+    border-radius:9px;
+    cursor:pointer;
+    text-align:right;
+    font-size:14px;
+  }
+  .quiz-opt:hover{ background:rgba(244,238,221,0.14); }
+  .quiz-opt.correct{ background:rgba(110,143,106,0.35); border-color:var(--sage); }
+  .quiz-opt.wrong{ background:rgba(185,104,58,0.35); border-color:var(--coral); }
+  .quiz-feedback{ margin-top:10px; font-size:13.5px; min-height:16px; color:#E8CFA0;}
+
+  ul.points{ padding-inline-start:22px; margin:14px 0; }
+  ul.points li{ margin-bottom:9px; line-height:1.9; font-size:15px; }
+  ul.points li::marker{ color:var(--coral-deep); }
+
+  .tool-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;}
+  @media (max-width:720px){ .tool-grid{ grid-template-columns:1fr; } }
+  .tool-card{ background:#fff; border-radius:12px; padding:16px 18px; box-shadow:var(--shadow); border-inline-start:4px solid var(--mustard);}
+  .tool-card h4{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:16px; margin:0 0 6px; color:var(--ink);}
+  .tool-card p{ font-size:13.5px; margin:0; color:var(--ink-soft); line-height:1.8;}
+
+  .cite{ font-size:12px; color:var(--sky); font-weight:600; white-space:nowrap; cursor:help; }
+  .cite::before{ content:"["; }
+  .cite::after{ content:"]"; }
+
+  .refs-card{ background:#fff; border:1px solid var(--rule); border-radius:14px; padding:22px 24px; margin:24px 0; box-shadow: var(--shadow); }
+  .refs-card h3{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:20px; margin:0 0 6px; color:var(--sky); }
+  .refs-card .refs-note{ font-size:13px; color:var(--ink-soft); margin-bottom:14px; }
+  .refs-card ol{ padding-inline-start:20px; margin:0; }
+  .refs-card ol li{ font-size:13.8px; line-height:1.95; color:var(--ink); margin-bottom:10px; }
+  .refs-card ol li .en{ color:var(--ink-soft); direction:ltr; display:inline-block; unicode-bidi:isolate; }
+
+  /* ===== Signature tool: observation checklist ===== */
+  .lab{ background: linear-gradient(160deg,#fff,#FBF6EC); border:1px solid var(--rule); border-radius:18px; padding:26px 28px; margin:26px 0; box-shadow: var(--shadow); }
+  .lab h3{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:22px; color:var(--sky); margin:0 0 4px;}
+  .lab .lab-desc{ font-size:14px; color:var(--ink-soft); margin-bottom:18px; line-height:1.85;}
+  .checklist-domains{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:20px;}
+  @media (max-width:720px){ .checklist-domains{ grid-template-columns:1fr; } }
+  .cl-domain{ background:#fff; border-radius:12px; padding:14px 16px; border:1px solid var(--rule);}
+  .cl-domain .cl-title{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:14.5px; margin-bottom:8px; display:flex; align-items:center; gap:6px;}
+  .cl-domain .cl-title .sw{ width:10px; height:10px; border-radius:3px; }
+  .cl-item{ display:flex; align-items:center; gap:8px; font-size:13.3px; color:var(--ink-soft); padding:5px 0; cursor:pointer; }
+  .cl-item input{ accent-color: var(--coral); width:15px; height:15px; }
+  .lab-result{ display:flex; gap:18px; flex-wrap:wrap; padding-top:18px; border-top:1px solid var(--rule);}
+  .bar-stat{ flex:1 1 150px; }
+  .bar-stat .l{ font-size:12px; color:var(--ink-soft); margin-bottom:6px; display:flex; justify-content:space-between;}
+  .bar-track{ height:9px; border-radius:5px; background:#EFE4CC; overflow:hidden;}
+  .bar-fill{ height:100%; border-radius:5px; width:0%; transition:width .4s ease; }
+  .lab-note{ font-size:12.5px; color:var(--coral-deep); margin-top:16px; }
+
+  /* ===== True/False activity ===== */
+  .tf-wrap{ display:flex; flex-direction:column; gap:10px; margin:18px 0; }
+  .tf-item{ background:#fff; border:1px solid var(--rule); border-radius:12px; padding:14px 18px; box-shadow:var(--shadow); }
+  .tf-text{ font-size:14.5px; color:var(--ink); margin-bottom:10px; line-height:1.85;}
+  .tf-btns{ display:flex; gap:8px; }
+  .tf-btn{ flex:1; padding:8px 10px; border-radius:8px; border:1px solid var(--rule); background:#FBF6EC; cursor:pointer; font-family:'Cairo',sans-serif; font-size:13.5px; color:var(--ink-soft); }
+  .tf-btn:hover{ background:#F4E9D2; }
+  .tf-btn.correct{ background: rgba(110,143,106,0.2); border-color:var(--sage); color:var(--ink); font-weight:700;}
+  .tf-btn.wrong{ background: rgba(185,104,58,0.2); border-color:var(--coral); color:var(--ink); font-weight:700;}
+  .tf-feedback{ font-size:12.5px; color:var(--coral-deep); margin-top:8px; min-height:14px;}
+
+  /* ===== Matching activity ===== */
+  .match-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0; }
+  @media (max-width:640px){ .match-grid{ grid-template-columns:1fr; } }
+  .match-col{ display:flex; flex-direction:column; gap:8px; }
+  .match-item{ text-align:right; padding:11px 14px; border-radius:10px; border:1.5px solid var(--rule); background:#fff; cursor:pointer; font-family:'Cairo',sans-serif; font-size:13.8px; color:var(--ink); box-shadow:var(--shadow); transition:.15s; }
+  .match-item:hover{ border-color:var(--sky); }
+  .match-item.selected{ border-color:var(--coral); background:rgba(221,138,91,0.1); }
+  .match-item.matched{ background:rgba(110,143,106,0.18); border-color:var(--sage); cursor:default; opacity:.85; }
+  .match-item.shake{ animation: shake .3s; border-color:var(--coral-deep); }
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-4px);} 75%{transform:translateX(4px);} }
+  .match-status{ font-size:13px; color:var(--sky); font-weight:600; margin-top:6px;}
+
+  /* ===== Categorize activity ===== */
+  .cat-items{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+  .cat-item{ padding:9px 14px; border-radius:999px; border:1.5px solid var(--rule); background:#fff; cursor:pointer; font-size:13.5px; color:var(--ink); box-shadow:var(--shadow); }
+  .cat-item:hover{ border-color:var(--sky); }
+  .cat-item.selected{ border-color:var(--coral); background:rgba(221,138,91,0.12); }
+  .cat-item.placed{ opacity:.6; cursor:default; }
+  .cat-targets{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:10px;}
+  @media (max-width:640px){ .cat-targets{ grid-template-columns:1fr; } }
+  .cat-target{ background:#fff; border:1.5px dashed var(--rule); border-radius:12px; padding:14px; min-height:90px; cursor:pointer; }
+  .cat-target:hover{ border-color:var(--sky); }
+  .cat-target.shake{ animation: shake .3s; border-color:var(--coral-deep); }
+  .cat-target-title{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:14.5px; color:var(--plum); margin-bottom:8px;}
+  .cat-target-drop{ display:flex; flex-wrap:wrap; gap:6px; }
+  .cat-target-drop .cat-item{ font-size:12.5px; padding:6px 11px; }
+
+  /* ===== MCQ test blocks (chapter test + final exam) ===== */
+  .test-block{ background: var(--plum); border-radius:16px; padding:26px 28px; margin:30px 0 10px; }
+  .test-block .test-header{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;}
+  .test-block .test-header h3{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:21px; color:#F7EFD8; margin:0; }
+  .test-score{ background:rgba(244,238,221,0.12); border:1px solid rgba(244,238,221,0.25); color:#F4EEDD; font-size:13px; font-weight:700; padding:6px 14px; border-radius:999px; }
+  .test-block .test-desc{ font-size:13px; color:#D9CFEA; margin:0 0 18px; }
+  .mini-q{ background:rgba(244,238,221,0.05); border:1px solid rgba(244,238,221,0.14); border-radius:12px; padding:16px 18px; margin-bottom:12px; }
+  .mini-q .mini-q-text{ color:#F4EEDD; font-size:14.3px; margin-bottom:10px; line-height:1.85; font-weight:600;}
+  .mini-q .quiz-options{ margin-top:0; }
+  .test-result{ margin-top:16px; padding-top:16px; border-top:1px solid rgba(244,238,221,0.18); font-size:14px; color:#F3E5C0; display:none; }
+  .test-result.show{ display:block; }
+  .test-note{ font-size:11.5px; color:#B9AE8C; margin-top:12px; }
+
+  /* ===== Completion badge ===== */
+  .completion-badge{
+    display:none;
+    margin-top:22px;
+    background: linear-gradient(135deg, #FFF6E0, #FBEFD2);
+    border:2px solid var(--mustard);
+    border-radius:16px;
+    padding:22px 26px;
+    text-align:center;
+    box-shadow: var(--shadow);
+  }
+  .completion-badge.show{ display:block; animation: popIn .45s ease; }
+  @keyframes popIn{ from{opacity:0; transform:scale(.92) translateY(6px);} to{opacity:1; transform:scale(1) translateY(0);} }
+  .completion-badge .badge-icon{ font-size:38px; margin-bottom:8px; line-height:1;}
+  .completion-badge .badge-title{ font-family:'Baloo Bhaijaan 2',sans-serif; font-size:19px; color:var(--coral-deep); margin-bottom:4px; }
+  .completion-badge .badge-sub{ font-size:13px; color:var(--ink-soft); }
+  .completion-badge.big{ padding:36px; border-width:3px; border-color:var(--coral-deep); background: linear-gradient(135deg, #FFF3E4, #FBE3CF); }
+  .completion-badge.big .badge-icon{ font-size:58px; }
+  .completion-badge.big .badge-title{ font-size:26px; }
+  .completion-badge.big .badge-sub{ font-size:14.5px; }
+
+  .tab-badge{ font-size:12px; margin-inline-start:2px; }
+
+  .footer-nav{ display:flex; justify-content:space-between; padding: 22px 0 6px; }
+  .nav-btn{ background: var(--plum); color:#F4EEDD; border:none; padding:12px 20px; border-radius:10px; cursor:pointer; font-family:'Cairo',sans-serif; font-size:14px; }
+  .nav-btn:hover{ background:#5b4d78; }
+  .nav-btn:disabled{ opacity:.35; cursor:default; }
+  .nav-btn.ghost{ background:transparent; color:var(--ink-soft); border:1px solid var(--rule); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="book-header">
+    <div>
+      <h1>القياس والتقويم التربوي للمرحلة الأساسية الدنيا</h1>
+      <p>كتاب تفاعلي يربط خصائص النمو النظرية بأدوات التقويم العملية المناسبة لأطفال الصفوف الأولى (٦–٩ سنوات).</p>
+      <p class="author-line">تأليف: شريهان مرتجى</p>
+    </div>
+    <div class="badge-stack">
+      <span class="badge">٦ فصول</span>
+      <span class="badge">اختبار نهاية كل فصل</span>
+      <span class="badge">اختبار نهائي شامل</span>
+      <span class="badge">أنشطة تفاعلية متنوعة</span>
+    </div>
+  </header>
+
+  <div class="tabs" id="tabsList"></div>
+
+  <div class="panel">
+    <div id="chapters"></div>
+    <div class="footer-nav">
+      <button class="nav-btn ghost" id="prevBtn">→ السابق</button>
+      <button class="nav-btn" id="nextBtn">التالي ←</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ Reusable interactive builders ============ */
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function buildTF(containerId, items){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  container.innerHTML = items.map((it,i)=>`
+    <div class="tf-item" data-idx="${i}" data-answer="${it.isTrue}">
+      <div class="tf-text">${it.statement}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" data-choice="true">صحيح</button>
+        <button class="tf-btn" data-choice="false">خطأ</button>
+      </div>
+      <div class="tf-feedback"></div>
+    </div>
+  `).join('');
+  container.querySelectorAll('.tf-item').forEach(item=>{
+    const answer = item.dataset.answer === 'true';
+    const fb = item.querySelector('.tf-feedback');
+    item.querySelectorAll('.tf-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(item.dataset.done) return;
+        item.dataset.done = "true";
+        const choice = btn.dataset.choice === 'true';
+        const correct = choice === answer;
+        btn.classList.add(correct ? 'correct' : 'wrong');
+        if(!correct){
+          item.querySelector(`[data-choice="${answer}"]`).classList.add('correct');
+        }
+        fb.textContent = correct ? '✓ إجابة صحيحة' : ('✗ غير صحيح — الإجابة الصحيحة: ' + (answer ? 'صحيح' : 'خطأ'));
+      });
+    });
+  });
+}
+
+function buildMatch(containerId, pairs){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const keyed = pairs.map((p,i)=>({...p, key:i}));
+  const leftOrder = shuffle(keyed);
+  const rightOrder = shuffle(keyed);
+  container.innerHTML = `
+    <div class="match-grid">
+      <div class="match-col">${leftOrder.map(p=>`<button class="match-item" data-key="${p.key}" data-side="left">${p.left}</button>`).join('')}</div>
+      <div class="match-col">${rightOrder.map(p=>`<button class="match-item" data-key="${p.key}" data-side="right">${p.right}</button>`).join('')}</div>
+    </div>
+    <div class="match-status">تبقّى ${pairs.length} من أصل ${pairs.length} أزواج للمطابقة</div>
+  `;
+  let selectedLeft = null;
+  let matchedCount = 0;
+  const statusEl = container.querySelector('.match-status');
+  container.querySelectorAll('[data-side="left"]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('matched')) return;
+      container.querySelectorAll('[data-side="left"]').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedLeft = btn;
+    });
+  });
+  container.querySelectorAll('[data-side="right"]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('matched') || !selectedLeft) return;
+      if(btn.dataset.key === selectedLeft.dataset.key){
+        btn.classList.add('matched');
+        selectedLeft.classList.add('matched');
+        selectedLeft.classList.remove('selected');
+        matchedCount++;
+        statusEl.textContent = matchedCount === pairs.length
+          ? '✓ أكملتِ جميع المطابقات بنجاح'
+          : `تبقّى ${pairs.length - matchedCount} من أصل ${pairs.length} أزواج للمطابقة`;
+        selectedLeft = null;
+      } else {
+        btn.classList.add('shake');
+        setTimeout(()=>btn.classList.remove('shake'), 350);
+      }
+    });
+  });
+}
+
+function buildCategorize(containerId, categories, items){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const shuffledItems = shuffle(items.map((it,i)=>({...it, idx:i})));
+  container.innerHTML = `
+    <div class="cat-items">${shuffledItems.map(it=>`<button class="cat-item" data-idx="${it.idx}" data-cat="${it.category}">${it.label}</button>`).join('')}</div>
+    <div class="cat-targets">${categories.map(c=>`
+      <div class="cat-target" data-cat="${c}">
+        <div class="cat-target-title">${c}</div>
+        <div class="cat-target-drop"></div>
+      </div>
+    `).join('')}</div>
+  `;
+  let selected = null;
+  container.querySelectorAll('.cat-item').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('placed')) return;
+      container.querySelectorAll('.cat-item').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selected = btn;
+    });
+  });
+  container.querySelectorAll('.cat-target').forEach(target=>{
+    target.addEventListener('click', ()=>{
+      if(!selected) return;
+      if(target.dataset.cat === selected.dataset.cat){
+        selected.classList.add('placed');
+        selected.classList.remove('selected');
+        target.querySelector('.cat-target-drop').appendChild(selected);
+      } else {
+        target.classList.add('shake');
+        setTimeout(()=>target.classList.remove('shake'), 350);
+      }
+      selected = null;
+    });
+  });
+}
+
+function buildTest(containerId, questions, tierMessages, onComplete){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  const total = questions.length;
+  container.innerHTML = `
+    <div class="test-header">
+      <h3>${container.dataset.title || 'اختبار'}</h3>
+      <span class="test-score" data-score>النتيجة: 0 / ${total}</span>
+    </div>
+    <p class="test-desc">${container.dataset.desc || ''}</p>
+    ${questions.map((q,qi)=>`
+      <div class="mini-q" data-qi="${qi}">
+        <div class="mini-q-text">${qi+1}. ${q.q}</div>
+        <div class="quiz-options">
+          ${q.options.map((opt,oi)=>`<div class="quiz-opt" data-correct="${oi===q.correct}">${opt}</div>`).join('')}
+        </div>
+      </div>
+    `).join('')}
+    <div class="test-result"></div>
+    <div class="test-note">لإعادة المحاولة من البداية، أعيدي تحميل صفحة الكتاب.</div>
+  `;
+  const scoreEl = container.querySelector('[data-score]');
+  const resultEl = container.querySelector('.test-result');
+  container.querySelectorAll('.mini-q').forEach(q=>{
+    const opts = q.querySelectorAll('.quiz-opt');
+    opts.forEach(opt=>{
+      opt.addEventListener('click', ()=>{
+        if(q.dataset.answered) return;
+        q.dataset.answered = "true";
+        const correct = opt.dataset.correct === "true";
+        q.dataset.correctAnswered = correct ? "true" : "false";
+        opts.forEach(o=>{
+          if(o.dataset.correct === "true") o.classList.add('correct');
+          else if(o === opt) o.classList.add('wrong');
+        });
+        updateTestScore();
+      });
+    });
+  });
+  function updateTestScore(){
+    const qs = container.querySelectorAll('.mini-q');
+    let answered = 0, correct = 0;
+    qs.forEach(q=>{
+      if(q.dataset.answered){
+        answered++;
+        if(q.dataset.correctAnswered === "true") correct++;
+      }
+    });
+    scoreEl.textContent = `النتيجة: ${correct} / ${total}`;
+    if(answered === total){
+      const pct = Math.round((correct/total)*100);
+      let msg;
+      if(pct >= 85) msg = tierMessages?.high || `ممتاز! (${pct}٪) — فهمك عميق لهذا المحتوى.`;
+      else if(pct >= 70) msg = tierMessages?.mid || `جيد جدًا (${pct}٪) — مع إمكانية مراجعة بعض النقاط.`;
+      else if(pct >= 50) msg = tierMessages?.low || `مقبول (${pct}٪) — يُنصح بمراجعة الإجابات الخاطئة.`;
+      else msg = tierMessages?.poor || `(${pct}٪) — يُنصح بإعادة قراءة المحتوى قبل المحاولة مجددًا.`;
+      resultEl.textContent = msg;
+      resultEl.classList.add('show');
+      if(typeof onComplete === 'function') onComplete(correct, total);
+    }
+  }
+}
+
+/* ============ Chapter data ============ */
+const chapters = [
+{
+  eyebrow:"الفصل الأول",
+  title:"من هو طفل المرحلة الأساسية الدنيا؟",
+  sub:"خصائص النمو بين ٦ و٩ سنوات عبر ثلاثة محاور متكاملة",
+  body:`
+    <p class="lede">قبل تصميم أي أداة تقويم، على المعلم أن يعرف من يجلس أمامه. طفل هذه المرحلة ليس نسخة مصغّرة من طالب المرحلة الإعدادية؛ له إيقاعه المعرفي والجسدي والانفعالي الخاص، وأي أداة تقويم تتجاهل ذلك ستقيس قدرته على "التعامل مع الاختبار" أكثر مما تقيس تعلّمه الفعلي.</p>
+
+    <div class="domain-grid">
+      <div class="domain">
+        <h4>النمو الجسدي والحركي</h4>
+        <p>تتطور المهارات الحركية الدقيقة تدريجيًا (الإمساك بالقلم، القص، الكتابة)، مع محدودية في مدى الانتباه الجالس لفترات طويلة. <span class="cite" title="الزيود وعليان، 2005">1</span></p>
+        <ul><li>فترات تركيز قصيرة (15–20 دقيقة)</li><li>حاجة للحركة والتنقل أثناء التعلم</li></ul>
+      </div>
+      <div class="domain b">
+        <h4>النمو المعرفي</h4>
+        <p>انتقال تدريجي من التفكير التخيلي إلى تفكير أكثر منطقية مرتبط بالمحسوس، مع صعوبة في التفكير المجرد البحت. <span class="cite" title="Piaget, 1952">2</span></p>
+        <ul><li>يفهم أفضل عبر الأمثلة الملموسة</li><li>يبدأ فهم مفهوم الثبات (Conservation)</li></ul>
+      </div>
+      <div class="domain c">
+        <h4>النمو الاجتماعي–الانفعالي</h4>
+        <p>يبدأ ببناء صورته عن ذاته كمتعلّم، ويتأثر بشدة بردود فعل المعلم وأقرانه تجاه أدائه. <span class="cite" title="Erikson, 1963">4</span></p>
+        <ul><li>حساسية عالية للمقارنة العلنية بالآخرين</li><li>حاجة قوية للتشجيع والإنجاز المرئي</li></ul>
+      </div>
+    </div>
+
+    <div class="reveal" onclick="this.classList.toggle('open')">
+      <div class="q">لماذا يُعدّ تجاهل هذه الخصائص خطأً تقويميًا شائعًا؟</div>
+      <div class="a">لأن كثيرًا من ممارسات التقويم "المستوردة" من المراحل الأعلى — كالاختبار الورقي الطويل، أو الأسئلة المجردة، أو الجلوس الساكن لأكثر من نصف ساعة — تصطدم مباشرة بحدود النمو الحركي والمعرفي والانفعالي لهذه الفئة العمرية، فتُنتج نتائج تعكس "قدرة الطفل على تحمّل الموقف" أكثر مما تعكس تعلّمه الحقيقي.</div>
+    </div>
+
+    <div class="section-title"><span class="tag">نشاط</span> صحّحي المفهوم</div>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 4px;">اقرئي كل عبارة وحدّدي إن كانت صحيحة أم خاطئة بناءً على ما ورد في الفصل.</p>
+    <div class="tf-wrap" id="tf1"></div>
+
+    <div class="section-title test"><span class="tag">اختبار</span> اختبار نهاية الفصل الأول</div>
+    <div class="test-block" id="test1" data-title="اختبار نهاية الفصل الأول" data-desc="ثلاثة أسئلة لتقييم فهمك لخصائص نمو طفل المرحلة الأساسية الدنيا."></div>
+  `,
+  init(){
+    buildTF('tf1', [
+      { statement:"يستطيع طفل هذه المرحلة الجلوس ساكنًا وتركيز انتباهه لأكثر من ساعة متواصلة دون تعب.", isTrue:false },
+      { statement:"تفكير الطفل في هذه المرحلة يعتمد على المحسوس والملموس أكثر من التجريد.", isTrue:true },
+      { statement:"لا يتأثر إحساس الطفل بذاته كمتعلّم بردود فعل المعلم أو الأقران.", isTrue:false }
+    ]);
+    buildTest('test1', [
+      { q:"ما العامل الذي يجعل الجلوس الساكن الطويل تحديًا لطفل هذه المرحلة؟", options:["ضعف الذاكرة العامة","محدودية مدى الانتباه والنمو الحركي","نقص في مستوى الذكاء"], correct:1 },
+      { q:"طفل يبني صورته عن ذاته كمتعلّم استنادًا بشكل كبير إلى:", options:["نتائج الاختبارات المعيارية فقط","ردود فعل المعلم والأقران تجاه أدائه","عمره الزمني فقط"], correct:1 },
+      { q:"مفهوم \"الثبات\" (Conservation) عند بياجيه يشير إلى:", options:["قدرة الطفل على تذكر المعلومات لفترة طويلة","إدراك أن كمية الشيء لا تتغير بتغيّر شكله","قدرة الطفل على الجلوس دون حركة"], correct:1 }
+    ]);
+  }
+},
+{
+  eyebrow:"الفصل الثاني",
+  title:"الأسس النظرية للنمو وتطبيقاتها",
+  sub:"بياجيه، فيجوتسكي، وإريكسون: كيف تتحول النظرية إلى قرار تقويمي؟",
+  body:`
+    <p class="lede">ثلاث نظريات نمو تُشكّل معًا الإطار المرجعي الأكثر استخدامًا في تفسير سلوك طفل هذه المرحلة، ولكل منها إسقاط عملي مباشر على طريقة التقويم.</p>
+
+    <div class="theorist-row">
+      <div class="theorist">
+        <div class="name">جان بياجيه <span class="cite" title="Piaget, 1952">2</span></div>
+        <div class="key">مرحلة انتقالية نحو العمليات المحسوسة</div>
+        <p>يبدأ الطفل بالتفكير المنطقي لكن يبقى مرتبطًا بالمحسوس والملموس. <strong>الأثر التقويمي:</strong> استخدام الصور والمواد المحسوسة والأنشطة العملية بدل الأسئلة اللفظية المجردة.</p>
+      </div>
+      <div class="theorist">
+        <div class="name">ليف فيجوتسكي <span class="cite" title="Vygotsky, 1978">3</span></div>
+        <div class="key">منطقة النمو التقريبي (ZPD)</div>
+        <p>الأداء المستقل وحده لا يكشف كامل قدرة الطفل. <strong>الأثر التقويمي:</strong> دمج تقويم قائم على المساعدة الموجّهة (Scaffolded Assessment) لتحديد الإمكانات الكامنة لا الأداء الحالي فقط.</p>
+      </div>
+      <div class="theorist">
+        <div class="name">إريك إريكسون <span class="cite" title="Erikson, 1963">4</span></div>
+        <div class="key">الاجتهاد مقابل الشعور بالنقص</div>
+        <p>ينشأ إحساس الطفل بالكفاءة من تجارب النجاح المتكررة. <strong>الأثر التقويمي:</strong> تغذية راجعة بنّاءة تُبرز التقدم لا الفشل، وتجنّب مقارنات علنية تُشعر الطفل بالنقص.</p>
+      </div>
+    </div>
+
+    <div class="quiz" id="quiz2">
+      <h3>سؤال تقويم ذاتي</h3>
+      <p style="margin:0 0 8px; font-size:14px; color:#D9CFEA;">معلمة تعطي الطفل تلميحًا بسيطًا لترى إن كان يستطيع إكمال المهمة بمساعدة محدودة قبل أن يعمل وحده. أي مفهوم تُطبّقه؟</p>
+      <div class="quiz-options">
+        <div class="quiz-opt" data-correct="false">التفكير المحسوس عند بياجيه</div>
+        <div class="quiz-opt" data-correct="true">منطقة النمو التقريبي عند فيجوتسكي</div>
+        <div class="quiz-opt" data-correct="false">أزمة الاجتهاد والنقص عند إريكسون</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="section-title"><span class="tag">نشاط</span> طابقي بين المنظّر والمفهوم</div>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 4px;">اختاري اسم المنظّر من العمود الأيمن، ثم اضغطي على المفهوم المرتبط به في العمود الأيسر.</p>
+    <div id="match2"></div>
+
+    <div class="section-title test"><span class="tag">اختبار</span> اختبار نهاية الفصل الثاني</div>
+    <div class="test-block" id="test2" data-title="اختبار نهاية الفصل الثاني" data-desc="ثلاثة أسئلة حول النظريات الثلاث وتطبيقاتها التقويمية."></div>
+  `,
+  init(){
+    buildMatch('match2', [
+      { left:"جان بياجيه", right:"العمليات المحسوسة والتفكير المرتبط بالملموس" },
+      { left:"ليف فيجوتسكي", right:"منطقة النمو التقريبي والمساعدة الموجّهة" },
+      { left:"إريك إريكسون", right:"الاجتهاد مقابل الشعور بالنقص" }
+    ]);
+    buildTest('test2', [
+      { q:"\"السقالة التعليمية\" (Scaffolding) مرتبطة بشكل مباشر بنظرية:", options:["بياجيه","فيجوتسكي","إريكسون"], correct:1 },
+      { q:"أزمة \"الاجتهاد مقابل الشعور بالنقص\" تحدث تحديدًا في مرحلة:", options:["المراهقة","الرضاعة والطفولة المبكرة","الطفولة المتوسطة (سنّ المدرسة)"], correct:2 },
+      { q:"التقويم القائم على المساعدة الموجّهة (Scaffolded Assessment) يهدف إلى:", options:["قياس الأداء المستقل فقط","الكشف عن الإمكانات الكامنة للطفل","تسريع نهاية الاختبار"], correct:1 }
+    ]);
+  }
+},
+{
+  eyebrow:"الفصل الثالث",
+  title:"لماذا لا يكفي الاختبار الورقي التقليدي؟",
+  sub:"مبادئ التقويم الملائم نمائيًا (Developmentally Appropriate Assessment)",
+  body:`
+    <p class="lede">التقويم الملائم نمائيًا لا يعني تبسيط المحتوى فقط، بل إعادة التفكير في شكل الأداة نفسها بما يتناسب مع طريقة تعلّم الطفل وتعبيره عمّا يعرفه. <span class="cite" title="NAEYC, 2022 — Developmentally Appropriate Practice Position Statement">5</span></p>
+
+    <div class="card">
+      <h3>خمسة مبادئ عملية <span class="cite" title="NAEYC, 2022">5</span></h3>
+      <ul class="points" style="margin:0;">
+        <li><strong>تعدد الأدلة:</strong> لا تُبنى الأحكام على أداة واحدة أو موقف اختباري واحد.</li>
+        <li><strong>السياق الطبيعي:</strong> يُفضَّل تقويم الطفل أثناء أداء طبيعي (لعب، نشاط صفي) لا موقف اختباري رسمي مربك.</li>
+        <li><strong>اللغة الملائمة عمريًا:</strong> صياغة واضحة، جمل قصيرة، ودعم بصري بدل تعليمات مجردة طويلة.</li>
+        <li><strong>الإيجاز الزمني:</strong> جلسات تقويم قصيرة متعددة أفضل من جلسة طويلة واحدة.</li>
+        <li><strong>إشراك الأسرة:</strong> ملاحظات الأهل مصدر معلومات تكميلي مهم عن سلوك الطفل خارج الصف.</li>
+      </ul>
+    </div>
+
+    <div class="reveal" onclick="this.classList.toggle('open')">
+      <div class="q">ما الفرق بين "تبسيط الاختبار" و"التقويم الملائم نمائيًا"؟</div>
+      <div class="a">تبسيط الاختبار يعني تقليل صعوبة نفس الأداة الورقية (أسئلة أسهل، عدد أقل). أما التقويم الملائم نمائيًا فهو أعمق: إعادة تصميم شكل الأداة وسياقها بالكامل بما يناسب طريقة الطفل في التعبير عن معرفته — كالملاحظة أثناء اللعب أو الأداء العملي — وليس مجرد تسهيل نفس الشكل الاختباري التقليدي.</div>
+    </div>
+
+    <div class="section-title"><span class="tag">نشاط</span> صنّفي الممارسات</div>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 4px;">اضغطي على كل ممارسة، ثم اضغطي على الفئة المناسبة لها (ملائم نمائيًا / غير ملائم نمائيًا).</p>
+    <div id="cat3"></div>
+
+    <div class="section-title test"><span class="tag">اختبار</span> اختبار نهاية الفصل الثالث</div>
+    <div class="test-block" id="test3" data-title="اختبار نهاية الفصل الثالث" data-desc="ثلاثة أسئلة حول مبادئ التقويم الملائم نمائيًا."></div>
+  `,
+  init(){
+    buildCategorize('cat3', ["ملائم نمائيًا","غير ملائم نمائيًا"], [
+      { label:"اختبار ورقي مدته ساعة كاملة دون استراحة", category:"غير ملائم نمائيًا" },
+      { label:"ملاحظة الطفل أثناء اللعب الحر", category:"ملائم نمائيًا" },
+      { label:"تعليمات مكتوبة طويلة دون أي دعم بصري", category:"غير ملائم نمائيًا" },
+      { label:"جلسات تقويم قصيرة متعددة عبر الأسبوع", category:"ملائم نمائيًا" }
+    ]);
+    buildTest('test3', [
+      { q:"من مبادئ التقويم الملائم نمائيًا:", options:["الاعتماد على جلسة اختبار واحدة طويلة","تعدد الأدلة عبر مواقف متعددة","استخدام لغة أكاديمية معقّدة"], correct:1 },
+      { q:"لماذا يُفضَّل تقويم الطفل ضمن سياق طبيعي كاللعب؟", options:["لأنه أسرع للمعلم فقط","لأنه يعكس أداءه الحقيقي دون ضغط الموقف الاختباري","لأنه لا يحتاج أي تخطيط مسبق"], correct:1 },
+      { q:"إشراك الأسرة في التقويم مبدأ مهم لأن:", options:["الأهل مصدر معلومات تكميلي عن سلوك الطفل خارج الصف","الأهل مسؤولون عن تصحيح الاختبارات","لا علاقة له بجودة التقويم"], correct:0 }
+    ]);
+  }
+},
+{
+  eyebrow:"الفصل الرابع",
+  title:"أدوات التقويم البديلة",
+  sub:"من الملاحظة إلى البورتفوليو: أربع أدوات أساسية لمعلم الصفوف الأولى",
+  body:`
+    <div class="tool-grid">
+      <div class="tool-card">
+        <h4>الملاحظة المنظّمة <span class="cite" title="NAEYC, 2022">5</span></h4>
+        <p>تسجيل سلوك الطفل أثناء أداء طبيعي باستخدام نموذج محدد المعايير مسبقًا، بدل الانطباع العام غير الموثّق.</p>
+      </div>
+      <div class="tool-card">
+        <h4>البورتفوليو (ملف الإنجاز) <span class="cite" title="الدوسري، 2004">7</span></h4>
+        <p>مجموعة مختارة من أعمال الطفل عبر الزمن تُظهر مسار تطوره، لا لحظة أداء واحدة معزولة.</p>
+      </div>
+      <div class="tool-card">
+        <h4>قوائم الرصد (Checklists) <span class="cite" title="الزيود وعليان، 2005">1</span></h4>
+        <p>قائمة مؤشرات سلوكية قابلة للرصد بنعم/لا، مفيدة لتتبع اكتساب مهارة محددة بسرعة ووضوح.</p>
+      </div>
+      <div class="tool-card">
+        <h4>سلالم التقدير (Rating Scales) <span class="cite" title="الزيود وعليان، 2005">1</span></h4>
+        <p>تدرّج في مستوى الأداء (مثلاً: مبتدئ – متقدم – متمكّن) يعطي دقة أكبر من قوائم الرصد الثنائية.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>مبدأ التكامل</h3>
+      <p style="margin:0;">لا تُستخدم هذه الأدوات كبديل حصري لبعضها، بل تتكامل: قائمة رصد سريعة أثناء النشاط اليومي، تُغذّي لاحقًا سلّم تقدير دوري، وتُجمع أفضل الأدلة عليها في بورتفوليو الطفل الفصلي.</p>
+    </div>
+
+    <div class="section-title"><span class="tag">نشاط</span> طابقي بين الأداة وتعريفها</div>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 4px;">اختاري اسم الأداة، ثم اضغطي على التعريف المطابق لها.</p>
+    <div id="match4"></div>
+
+    <div class="section-title test"><span class="tag">اختبار</span> اختبار نهاية الفصل الرابع</div>
+    <div class="test-block" id="test4" data-title="اختبار نهاية الفصل الرابع" data-desc="ثلاثة أسئلة حول أدوات التقويم البديلة الأربع."></div>
+  `,
+  init(){
+    buildMatch('match4', [
+      { left:"الملاحظة المنظّمة", right:"تسجيل السلوك أثناء أداء طبيعي وفق معايير محددة" },
+      { left:"البورتفوليو", right:"مجموعة أعمال مختارة تُظهر التطور عبر الزمن" },
+      { left:"قوائم الرصد", right:"مؤشرات سلوكية تُرصد بنعم/لا" },
+      { left:"سلالم التقدير", right:"تدرّج في مستوى الأداء بدقة أعلى" }
+    ]);
+    buildTest('test4', [
+      { q:"الأداة التي تعتمد على تدرّج مستوى الأداء (مبتدئ – متقدم – متمكّن) هي:", options:["قائمة الرصد","سلّم التقدير","الملاحظة العابرة"], correct:1 },
+      { q:"البورتفوليو يفيد بشكل خاص في:", options:["قياس لحظة أداء واحدة معزولة","توثيق مسار تطور الطفل عبر الزمن","استبدال كل أدوات التقويم الأخرى"], correct:1 },
+      { q:"مبدأ \"التكامل\" بين أدوات التقويم يعني:", options:["استخدام أداة واحدة فقط لضمان الدقة","دمج نتائج أدوات متعددة لتكوين صورة شاملة","استخدام كل أداة بمعزل تام عن الأخرى"], correct:1 }
+    ]);
+  }
+},
+{
+  eyebrow:"الفصل الخامس",
+  title:"المختبر التفاعلي — بطاقة ملاحظة الطفل",
+  sub:"جرّبي أداة رصد مصغّرة عبر المجالات النمائية الثلاثة وشاهدي الملف الفوري",
+  body:`
+    <p class="lede">أدناه نموذج مصغّر لقائمة رصد تفاعلية تحاكي ما قد يستخدمه معلم الصفوف الأولى أثناء نشاط صفي. أشّري على المؤشرات التي لاحظتِها فعليًا لدى طفل افتراضي، وشاهدي كيف يتشكّل الملف النمائي المبدئي له فورًا.</p>
+
+    <div class="lab">
+      <h3>بطاقة الرصد</h3>
+      <p class="lab-desc">اختاري المؤشرات الملحوظة في كل مجال. الأداة توضيحية لأغراض التدريب على مبدأ "تعدد الأدلة عبر المجالات".</p>
+      <div class="checklist-domains" id="checklistWrap"></div>
+      <div class="lab-result" id="labResult"></div>
+      <div class="lab-note">ملاحظة: الأداة الحقيقية في الصف تُستخدم عبر أسابيع متعددة، لا في جلسة واحدة، لضمان تمثيل عادل لأداء الطفل.</div>
+    </div>
+
+    <div class="section-title"><span class="tag">نشاط</span> صحّحي المفهوم</div>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 4px;">استنادًا إلى مبدأ بطاقة الرصد أعلاه، حدّدي صحة العبارات التالية.</p>
+    <div class="tf-wrap" id="tf5"></div>
+
+    <div class="section-title test"><span class="tag">اختبار</span> اختبار نهاية الفصل الخامس</div>
+    <div class="test-block" id="test5" data-title="اختبار نهاية الفصل الخامس" data-desc="ثلاثة أسئلة حول المبدأ الذي تقوم عليه بطاقة الرصد التفاعلية."></div>
+  `,
+  init(){
+    const domainsData = [
+      { key:'cognitive', title:'المجال المعرفي', color:'var(--coral)', items:[
+        'يصنّف الأشياء وفق أكثر من خاصية واحدة',
+        'يفهم مفهوم الثبات (كمية الماء لا تتغير بتغير شكل الإناء)',
+        'يتبع تعليمات من خطوتين متتاليتين'
+      ]},
+      { key:'physical', title:'المجال الحركي', color:'var(--sage)', items:[
+        'يمسك القلم بقبضة ناضجة نسبيًا',
+        'ينسخ أشكالًا هندسية بسيطة بدقة',
+        'يحافظ على تركيزه الجالس ١٥ دقيقة على الأقل'
+      ]},
+      { key:'social', title:'المجال الاجتماعي–الانفعالي', color:'var(--sky)', items:[
+        'يشارك في نشاط جماعي دون صراع متكرر',
+        'يعبّر عن إحباطه بالكلام لا بالبكاء أو الانسحاب',
+        'يطلب المساعدة عند الحاجة بدل التجمّد أمام الصعوبة'
+      ]}
+    ];
+    const wrap = document.getElementById('checklistWrap');
+    wrap.innerHTML = domainsData.map(d=>`
+      <div class="cl-domain">
+        <div class="cl-title"><span class="sw" style="background:${d.color}"></span>${d.title}</div>
+        ${d.items.map(it=>`
+          <label class="cl-item">
+            <input type="checkbox" data-domain="${d.key}">
+            <span>${it}</span>
+          </label>
+        `).join('')}
+      </div>
+    `).join('');
+    function updateResult(){
+      const resultEl = document.getElementById('labResult');
+      resultEl.innerHTML = domainsData.map(d=>{
+        const boxes = document.querySelectorAll(`input[data-domain="${d.key}"]`);
+        const checked = document.querySelectorAll(`input[data-domain="${d.key}"]:checked`).length;
+        const pct = Math.round((checked/boxes.length)*100);
+        return `
+          <div class="bar-stat">
+            <div class="l"><span>${d.title}</span><span>${checked}/${boxes.length}</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${d.color};"></div></div>
+          </div>
+        `;
+      }).join('');
+    }
+    wrap.querySelectorAll('input[type=checkbox]').forEach(cb=> cb.addEventListener('change', updateResult));
+    updateResult();
+
+    buildTF('tf5', [
+      { statement:"استخدام أداة رصد واحدة فقط كافٍ للحكم على نمو الطفل بدقة.", isTrue:false },
+      { statement:"الرصد عبر مجالات متعددة (معرفي، حركي، اجتماعي) يعطي صورة أشمل عن الطفل.", isTrue:true },
+      { statement:"يُفضَّل تكرار الرصد عبر أسابيع متعددة بدل الاكتفاء بجلسة واحدة.", isTrue:true }
+    ]);
+    buildTest('test5', [
+      { q:"الهدف من رصد الطفل عبر مجالات متعددة (كما في بطاقة هذا الفصل) هو:", options:["توفير الوقت على المعلم فقط","تجنّب الحكم على الطفل استنادًا لمجال واحد فقط","استبدال جميع أدوات التقويم الأخرى"], correct:1 },
+      { q:"بطاقة الملاحظة التفاعلية في هذا الفصل تُطبّق عمليًا مبدأ:", options:["الاختبار الموحّد","تعدد الأدلة","التصحيح الآلي فقط"], correct:1 },
+      { q:"لماذا يُنصح بتكرار الرصد عبر أسابيع متعددة بدل الاكتفاء بمرة واحدة؟", options:["لأن أداء الطفل ومزاجه يتقلبان يوميًا","لأن ذلك يُسهّل على المعلم فقط","لا داعي للتكرار إطلاقًا"], correct:0 }
+    ]);
+  }
+},
+{
+  eyebrow:"الفصل السادس",
+  title:"معايير الجودة والاعتبارات الأخلاقية",
+  sub:"تطبيق إطار AERA/APA/NCME عند تقويم صغار السن",
+  body:`
+    <p class="lede">معايير الجودة نفسها (الصدق، الثبات، العدالة) المستخدمة مع الكبار تنطبق على تقويم الأطفال، لكنها تحتاج قراءة خاصة تراعي حساسية هذه الفئة العمرية. <span class="cite" title="AERA, APA, & NCME, 2014">6</span></p>
+
+    <div class="card">
+      <h3>اعتبارات خاصة بصغار السن <span class="cite" title="AERA, APA, & NCME, 2014">6</span></h3>
+      <ul class="points" style="margin:0;">
+        <li><strong>الصدق:</strong> هل تقيس الأداة المهارة فعلاً، أم تقيس قدرة الطفل على فهم تعليمات معقّدة لغويًا؟</li>
+        <li><strong>الثبات:</strong> تقلّب انتباه الطفل ومزاجه يوميًا يستدعي جلسات رصد متعددة لا جلسة واحدة حاسمة.</li>
+        <li><strong>العدالة:</strong> تجنّب أدوات تفترض خبرات ثقافية أو لغوية غير متكافئة بين الأطفال.</li>
+        <li><strong>الحد من القلق:</strong> تهيئة نفسية للطفل قبل أي موقف تقويمي رسمي، وتجنّب لغة التهديد أو التنافس الحاد. <span class="cite" title="NAEYC, 2022">5</span></li>
+      </ul>
+    </div>
+
+    <div class="section-title"><span class="tag">نشاط</span> صحّحي المفهوم</div>
+    <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 4px;">حدّدي صحة العبارات التالية حول معايير الجودة والاعتبارات الأخلاقية.</p>
+    <div class="tf-wrap" id="tf6"></div>
+
+    <div class="quiz" id="quiz6">
+      <h3>سؤال تقويم ذاتي</h3>
+      <p style="margin:0 0 8px; font-size:14px; color:#D9CFEA;">أداة تقويم تتطلب من الطفل قراءة تعليمات طويلة ومعقّدة لأداء مهمة رياضية بسيطة. ما الخطر الأساسي على صدق النتيجة؟</p>
+      <div class="quiz-options">
+        <div class="quiz-opt" data-correct="false">النتيجة ستكون مرتفعة جدًا لجميع الأطفال</div>
+        <div class="quiz-opt" data-correct="true">النتيجة قد تقيس مهارة فهم التعليمات اللغوية أكثر من المهارة الرياضية نفسها</div>
+        <div class="quiz-opt" data-correct="false">لا يوجد أي أثر على الصدق</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="card">
+      <h3>خاتمة الكتاب</h3>
+      <p style="margin:0;">تقويم طفل المرحلة الأساسية الدنيا مسؤولية تبدأ بفهم من هو هذا الطفل نمائيًا، وتمر عبر اختيار أدوات تحترم طريقته في التعلّم والتعبير، وتنتهي بالتزام أخلاقي بألا تتحول لحظة التقويم إلى مصدر قلق أو شعور بالنقص، بل إلى فرصة أخرى للنمو.</p>
+    </div>
+
+    <div class="section-title test"><span class="tag">اختبار</span> اختبار نهاية الفصل السادس</div>
+    <div class="test-block" id="test6" data-title="اختبار نهاية الفصل السادس" data-desc="ثلاثة أسئلة حول معايير الجودة والاعتبارات الأخلاقية."></div>
+
+    <div class="refs-card" id="refsAnchor">
+      <h3>قائمة المراجع</h3>
+      <p class="refs-note">المصادر التي استند إليها محتوى هذا الكتاب التفاعلي، مرتّبة برقم الاستشهاد الوارد بجانب كل فقرة.</p>
+      <ol>
+        <li>الزيود، نادر فهمي، وهشام عامر عليان (2005). <em>مبادئ القياس والتقويم في التربية</em> (ط3). عمّان: دار الفكر.</li>
+        <li><span class="en">Piaget, J. (1952). <em>The Origins of Intelligence in Children</em>. New York: International Universities Press.</span></li>
+        <li><span class="en">Vygotsky, L. S. (1978). <em>Mind in Society: The Development of Higher Psychological Processes</em>. Cambridge, MA: Harvard University Press.</span></li>
+        <li><span class="en">Erikson, E. H. (1963). <em>Childhood and Society</em> (2nd ed.). New York: Norton.</span></li>
+        <li><span class="en">National Association for the Education of Young Children (NAEYC). (2022). <em>Developmentally Appropriate Practice</em> (Position Statement). Washington, DC: NAEYC.</span></li>
+        <li><span class="en">AERA, APA, & NCME (2014). <em>Standards for Educational and Psychological Testing</em>. Washington, DC: American Educational Research Association.</span></li>
+        <li>الدوسري، راشد (2004). <em>القياس والتقويم التربوي الحديث: مبادئ وتطبيقات وقضايا معاصرة</em>. عمّان: دار الفكر.</li>
+      </ol>
+    </div>
+  `,
+  init(){
+    buildTF('tf6', [
+      { statement:"الثبات وحده كافٍ لضمان جودة أداة التقويم دون الحاجة لأي معيار آخر.", isTrue:false },
+      { statement:"العدالة في التقويم تعني خلو الأداة من التحيز الثقافي أو اللغوي بين الأطفال.", isTrue:true },
+      { statement:"تُطبَّق معايير AERA/APA/NCME على تقويم الكبار فقط دون الأطفال.", isTrue:false }
+    ]);
+    buildTest('test6', [
+      { q:"الجهات الثلاث التي تصدر معايير القياس والتقويم النفسي والتربوي هي:", options:["اليونسكو والبنك الدولي ومنظمة الصحة العالمية","AERA وAPA وNCME","وزارات التربية العربية فقط"], correct:1 },
+      { q:"\"العدالة\" في معايير التقويم تعني بشكل أساسي:", options:["إعطاء جميع الأطفال نفس الدرجة","خلو الأداة من التحيز الثقافي أو اللغوي","تسهيل الاختبار للجميع دون استثناء"], correct:1 },
+      { q:"أحد أهم أسباب الحد من قلق الطفل أثناء التقويم هو:", options:["الحصول على نتائج أكثر دقة تعكس قدرته الحقيقية","تسريع وقت الاختبار فقط","تقليل عدد الأسئلة فقط"], correct:0 }
+    ]);
+  }
+},
+{
+  eyebrow:"الاختبار النهائي",
+  title:"اختبار نهائي شامل",
+  sub:"قيّمي فهمك لمحتوى الفصول الستة كاملة في اختبار واحد مكوّن من ١٢ سؤالًا",
+  isExam:true,
+  body:`
+    <p class="lede">هذا الاختبار يجمع أسئلة من جميع فصول الكتاب. أجيبي عن كل سؤال بالضغط على الخيار الذي تعتقدين أنه صحيح، وستظهر لك النتيجة النهائية وتقييم عام بعد الإجابة عن جميع الأسئلة.</p>
+
+    <div class="test-block" id="finalExam" data-title="الاختبار النهائي — ١٢ سؤالًا" data-desc="يغطي هذا الاختبار محتوى الفصول من الأول إلى السادس بالتساوي."></div>
+  `,
+  init(){
+    buildTest('finalExam', [
+      { q:"أي من الخصائص التالية تصف بدقة الانتباه لدى طفل المرحلة الأساسية الدنيا؟", options:["ثابت لساعات طويلة دون توقف","قصير نسبيًا ويحتاج فترات راحة وحركة","غير قابل للملاحظة أو القياس"], correct:1 },
+      { q:"الحساسية للمقارنة العلنية بالأقران تنتمي إلى مجال:", options:["المجال المعرفي","المجال الحركي","المجال الاجتماعي–الانفعالي"], correct:2 },
+      { q:"من واضع مفهوم \"العمليات المحسوسة\" في النمو المعرفي؟", options:["فيجوتسكي","بياجيه","إريكسون"], correct:1 },
+      { q:"الأثر التقويمي لنظرية فيجوتسكي يتمثل في:", options:["الاعتماد فقط على الاختبارات الموحّدة","تقويم الأداء بمساعدة موجّهة لكشف الإمكانات الكامنة","تجاهل دور الكبار في عملية التعلّم"], correct:1 },
+      { q:"الفرق الجوهري بين \"تبسيط الاختبار\" و\"التقويم الملائم نمائيًا\" هو أن الثاني:", options:["لا يوجد فرق حقيقي بينهما","يعيد تصميم شكل الأداة وسياقها بالكامل لا مجرد تسهيلها","أضيق نطاقًا من الأول"], correct:1 },
+      { q:"تعدد جلسات التقويم القصيرة بدل جلسة طويلة واحدة يخدم مبدأ:", options:["الإيجاز الزمني","صدق البناء فقط","الثبات الإحصائي فقط"], correct:0 },
+      { q:"أي أداة تعتمد على مؤشرات ثنائية (نعم/لا)؟", options:["سلّم التقدير","قائمة الرصد","البورتفوليو"], correct:1 },
+      { q:"الأداة الأنسب لتوثيق تطور الطفل عبر فصل دراسي كامل هي:", options:["قائمة رصد يومية معزولة","البورتفوليو","اختبار نهائي واحد فقط"], correct:1 },
+      { q:"بطاقة ملاحظة الطفل التفاعلية (الفصل الخامس) صُممت لتوضيح مبدأ:", options:["الاكتفاء بمجال واحد لتوفير الوقت","الرصد عبر مجالات نمائية متعددة","استبعاد دور المعلم من عملية التقويم"], correct:1 },
+      { q:"لماذا لا تُبنى الأحكام النهائية على جلسة رصد واحدة؟", options:["لأن أداء الطفل يتأثر بعوامل يومية متغيرة","لأن جلسة واحدة تستغرق وقتًا طويلاً جدًا","لا يوجد سبب علمي لذلك"], correct:0 },
+      { q:"معايير AERA/APA/NCME تشمل من بين محاورها الرئيسية:", options:["الصدق والثبات والعدالة وتوثيق عملية البناء","السرعة والتكلفة فقط","عدد صفحات الاختبار فقط"], correct:0 },
+      { q:"الهدف الأخلاقي الأسمى للتقويم في هذه المرحلة العمرية هو:", options:["تصنيف الأطفال بأسرع وقت ممكن","أن يكون فرصة للنمو لا مصدر قلق أو شعور بالنقص","تقليل عبء العمل على المعلم فقط"], correct:1 }
+    ], {
+      high:"ممتاز! نتيجتك تعكس فهمًا عميقًا ومتكاملًا لمحتوى الكتاب بأكمله.",
+      mid:"جيد جدًا — استوعبتِ معظم المفاهيم الأساسية، راجعي الأسئلة التي أخطأتِ فيها لتثبيت الفهم.",
+      low:"مقبول — يُنصح بمراجعة الفصول المرتبطة بالأسئلة التي أخطأتِ فيها قبل الانتقال لتطبيق عملي.",
+      poor:"يُنصح بإعادة قراءة فصول الكتاب بتمعّن، ثم إعادة المحاولة لضمان فهم أعمق للمحتوى."
+    });
+  }
+}
+];
+
+/* ============ Rendering & navigation ============ */
+const chaptersEl = document.getElementById('chapters');
+const tabsList = document.getElementById('tabsList');
+let current = 0;
+let visited = new Set();
+let completedChapters = new Set();
+
+function showBadge(badgeId, chapterIdx){
+  const badge = document.getElementById(badgeId);
+  if(badge) badge.classList.add('show');
+  completedChapters.add(chapterIdx);
+  renderTabs();
+}
+
+function render(){
+  chaptersEl.innerHTML = chapters.map((c,i)=>`
+    <section class="chapter ${i===current?'active':''}">
+      <div class="eyebrow">${c.eyebrow}</div>
+      <h2 class="page-title">${c.title}</h2>
+      <div class="page-sub">${c.sub}</div>
+      ${c.body}
+    </section>
+  `).join('');
+  bindQuizzes();
+  if(chapters[current].init) chapters[current].init();
+}
+
+function renderTabs(){
+  tabsList.innerHTML = chapters.map((c,i)=>`
+    <button class="tab ${i===current?'active':''} ${visited.has(i)?'done':''} ${c.isExam?'exam-tab':''}" data-idx="${i}">
+      <span class="dot"></span><span>${c.title}</span>${completedChapters.has(i) ? '<span class="tab-badge">🏅</span>' : ''}
+    </button>
+  `).join('');
+  tabsList.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click', ()=> goTo(parseInt(t.dataset.idx)));
+  });
+}
+
+function goTo(idx){
+  current = Math.max(0, Math.min(chapters.length-1, idx));
+  visited.add(current);
+  render();
+  renderTabs();
+  document.getElementById('prevBtn').disabled = current===0;
+  document.getElementById('nextBtn').textContent = current===chapters.length-1 ? 'أنهيتِ الكتاب ✓' : 'التالي ←';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.getElementById('prevBtn').addEventListener('click', ()=> goTo(current-1));
+document.getElementById('nextBtn').addEventListener('click', ()=> { if(current < chapters.length-1) goTo(current+1); });
+
+function bindQuizzes(){
+  document.querySelectorAll('.quiz').forEach(quiz=>{
+    const opts = quiz.querySelectorAll('.quiz-opt');
+    const feedback = quiz.querySelector('.quiz-feedback');
+    opts.forEach(opt=>{
+      opt.addEventListener('click', ()=>{
+        if(quiz.dataset.answered) return;
+        quiz.dataset.answered = "true";
+        const correct = opt.dataset.correct === "true";
+        opts.forEach(o=>{
+          if(o.dataset.correct === "true") o.classList.add('correct');
+          else if(o===opt) o.classList.add('wrong');
+        });
+        feedback.textContent = correct ? "✓ إجابة صحيحة — أحسنتِ." : "✗ إجابة غير دقيقة — لاحظي الإجابة المظللة بالأخضر.";
+      });
+    });
+  });
+}
+
+render();
+renderTabs();
+goTo(0);
+</script>
+</body>
+</html>
